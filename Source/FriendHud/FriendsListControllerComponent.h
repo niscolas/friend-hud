@@ -18,7 +18,8 @@ class FRIENDHUD_API UFriendsListControllerComponent : public UActorComponent {
 public:
     UFriendsListControllerComponent();
 
-    TArray<UDefaultUserDataWrapper *> GetDatabaseAsUObjects();
+    UFUNCTION(BlueprintPure, Category = "Friend List")
+    TArray<UDefaultUserDataWrapper *> GetDatabaseAsUObjects() const;
 
 private:
     virtual void BeginPlay() override;
@@ -26,12 +27,6 @@ private:
     TickComponent(float DeltaTime,
                   ELevelTick TickType,
                   FActorComponentTickFunction *ThisTickFunction) override;
-
-    UPROPERTY(EditAnywhere,
-              BlueprintReadWrite,
-              Category = "Friend List",
-              meta = (AllowPrivateAccess))
-    UFriendsListDataAsset *InitialFriendsList;
 
     UPROPERTY(VisibleAnywhere,
               BlueprintReadOnly,

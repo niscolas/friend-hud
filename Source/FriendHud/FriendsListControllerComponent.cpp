@@ -6,7 +6,6 @@ UFriendsListControllerComponent::UFriendsListControllerComponent() {
 
 void UFriendsListControllerComponent::BeginPlay() {
     Super::BeginPlay();
-    Database.Append(InitialFriendsList->GetContent());
 }
 
 void UFriendsListControllerComponent::TickComponent(
@@ -17,7 +16,7 @@ void UFriendsListControllerComponent::TickComponent(
 }
 
 TArray<UDefaultUserDataWrapper *>
-UFriendsListControllerComponent::GetDatabaseAsUObjects() {
+UFriendsListControllerComponent::GetDatabaseAsUObjects() const {
     TArray<UDefaultUserDataWrapper *> Result;
     for (auto UserDataStruct : Database) {
         Result.Emplace(UDefaultUserDataWrapper::From(UserDataStruct));
