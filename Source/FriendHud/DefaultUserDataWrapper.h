@@ -13,6 +13,14 @@ class FRIENDHUD_API UDefaultUserDataWrapper : public UObject {
 public:
     static UDefaultUserDataWrapper *From(FDefaultUserData Data);
 
+    FORCEINLINE FDefaultUserData &GetSourceData() {
+        return SourceData;
+    }
+
+    FORCEINLINE void SetSourceData(FDefaultUserData Value) {
+        SourceData = Value;
+    }
+
 private:
     UPROPERTY(EditAnywhere,
               BlueprintReadWrite,

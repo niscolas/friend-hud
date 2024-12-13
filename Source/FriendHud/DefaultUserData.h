@@ -24,6 +24,15 @@ public:
         : Icon(PIcon), Name(PName), ConnectionState(PConnectionState),
           Description(PDescription){};
 
+    FORCEINLINE EUserConnectionStateType GetConnectionState() const {
+        return ConnectionState;
+    }
+
+    FORCEINLINE void
+    SetConnectionState(EUserConnectionStateType PConnectionState) {
+        ConnectionState = PConnectionState;
+    }
+
 private:
     UPROPERTY(EditAnywhere,
               BlueprintReadWrite,

@@ -8,7 +8,10 @@
 #include "FriendsListControllerComponent.generated.h"
 
 UDELEGATE()
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDatabaseStateChanged);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnlineUsersChanged);
+
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOfflineUsersChanged);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 
@@ -18,24 +21,48 @@ class FRIENDHUD_API UFriendsListControllerComponent : public UActorComponent {
 public:
     UFriendsListControllerComponent();
 
-    UFUNCTION(BlueprintPure, Category = "Friend List")
-    TArray<UDefaultUserDataWrapper *> GetDatabaseAsUObjects() const;
+    UFUNCTION(BlueprintCallable, Category = "Friends List")
+    void AppendToDatabase(TArray<FDefaultUserData> RawUsersData);
 
 private:
+    UFUNCTION(BlueprintCallable, Category = "Friends List|Connection")
+    void ReconnectOrDisconnectRandomPlayer();
+
     virtual void BeginPlay() override;
     virtual void
     TickComponent(float DeltaTime,
                   ELevelTick TickType,
                   FActorComponentTickFunction *ThisTickFunction) override;
 
+    void CacheUsers();
+    void BroadcastOnlineUsersChanged();
+    void BroadcastOfflineUsersChanged();
+
     UPROPERTY(VisibleAnywhere,
               BlueprintReadOnly,
               Category = "Friend List",
               meta = (AllowPrivateAccess))
-    TArray<FDefaultUserData> Database;
+    TArray<UDefaultUserDataWrapper *> Database;
+
+    UPROPERTY(VisibleAnywhere,
+              BlueprintReadOnly,
+              Category = "Friend List",
+              meta = (AllowPrivateAccess))
+    TArray<UDefaultUserDataWrapper *> OnlineUsersCached;
+
+    UPROPERTY(VisibleAnywhere,
+              BlueprintReadOnly,
+              Category = "Friend List",
+              meta = (AllowPrivateAccess))
+    TArray<UDefaultUserDataWrapper *> OfflineUsersCached;
 
     UPROPERTY(BlueprintAssignable,
               Category = "Friend List",
               meta = (AllowPrivateAccess))
-    FDatabaseStateChanged DatabaseStateChanged;
+    FOnlineUsersChanged OnlineUsersChanged;
+
+    UPROPERTY(BlueprintAssignable,
+              Category = "Friend List",
+              meta = (AllowPrivateAccess))
+    FOfflineUsersChanged OfflineUsersChanged;
 };
