@@ -1,5 +1,6 @@
 #include "FriendsListControllerComponent.h"
 #include "DefaultUserDataWrapper.h"
+#include "Logging/LogMacros.h"
 
 UFriendsListControllerComponent::UFriendsListControllerComponent() {
 }
