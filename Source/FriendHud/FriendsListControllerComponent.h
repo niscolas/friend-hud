@@ -13,6 +13,11 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnlineUsersChanged);
 UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOfflineUsersChanged);
 
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLastConnectedUserChanged,
+                                            UDefaultUserDataWrapper *,
+                                            Value);
+
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 
 class FRIENDHUD_API UFriendsListControllerComponent : public UActorComponent {
@@ -65,4 +70,9 @@ private:
               Category = "Friend List",
               meta = (AllowPrivateAccess))
     FOfflineUsersChanged OfflineUsersChanged;
+
+    UPROPERTY(BlueprintAssignable,
+              Category = "Friend List",
+              meta = (AllowPrivateAccess))
+    FLastConnectedUserChanged LastConnectedUserChanged;
 };

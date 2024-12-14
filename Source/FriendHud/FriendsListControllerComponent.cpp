@@ -68,6 +68,7 @@ void UFriendsListControllerComponent::ReconnectOrDisconnectRandomPlayer() {
 
         OnlineUsersCached.Emplace(Database[RandomUserIndex]);
         OfflineUsersCached.Remove(Database[RandomUserIndex]);
+        LastConnectedUserChanged.Broadcast(Database[RandomUserIndex]);
     }
 
     BroadcastOnlineUsersChanged();
