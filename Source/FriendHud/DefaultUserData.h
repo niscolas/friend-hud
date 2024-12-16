@@ -19,10 +19,11 @@ public:
     FDefaultUserData(){};
     FDefaultUserData(UTexture2D *PIcon,
                      FString PName,
+                     int PLevel,
                      EUserConnectionStateType PConnectionState,
                      FText PDescription)
-        : Icon(PIcon), Name(PName), ConnectionState(PConnectionState),
-          Description(PDescription){};
+        : Icon(PIcon), Name(PName), Level(PLevel),
+          ConnectionState(PConnectionState), Description(PDescription){};
 
     FORCEINLINE EUserConnectionStateType GetConnectionState() const {
         return ConnectionState;
@@ -45,6 +46,12 @@ private:
               Category = "User Data",
               meta = (AllowPrivateAccess))
     FString Name;
+
+    UPROPERTY(EditAnywhere,
+              BlueprintReadWrite,
+              Category = "User Data",
+              meta = (AllowPrivateAccess))
+    int Level;
 
     UPROPERTY(EditAnywhere,
               BlueprintReadWrite,
