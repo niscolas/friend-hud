@@ -6,6 +6,7 @@
 #include "CoreMinimal.h"
 #include "FriendHud/DefaultUserDataWrapper.h"
 #include "FriendsListControllerComponent.h"
+#include "Math/Color.h"
 #include "FriendCharactersManagerComponent.generated.h"
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))

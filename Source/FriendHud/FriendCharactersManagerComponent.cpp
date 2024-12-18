@@ -2,6 +2,7 @@
 #include "FriendCharacter.h"
 #include "FriendsListControllerComponent.h"
 #include "HelperMacros.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "NavigationSystem.h"
 
 UFriendCharactersManagerComponent::UFriendCharactersManagerComponent() {
