@@ -5,6 +5,11 @@
 #include "UObject/NoExportTypes.h"
 #include "DefaultUserDataWrapper.generated.h"
 
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSourceDataChanged,
+                                            FDefaultUserData,
+                                            NewValue);
+
 UCLASS(BlueprintType)
 
 class FRIENDHUD_API UDefaultUserDataWrapper : public UObject {
@@ -19,6 +24,7 @@ public:
 
     FORCEINLINE void SetSourceData(FDefaultUserData Value) {
         SourceData = Value;
+        SourceDataChanged.Broadcast(Value);
     }
 
 private:
@@ -27,4 +33,9 @@ private:
               Category = "User Data",
               meta = (AllowPrivateAccess))
     FDefaultUserData SourceData;
+
+    UPROPERTY(BlueprintAssignable,
+              Category = "User Data",
+              meta = (AllowPrivateAccess))
+    FSourceDataChanged SourceDataChanged;
 };
