@@ -54,17 +54,17 @@ void UFriendsListControllerComponent::BroadcastOfflineUsersChanged() {
 
 void UFriendsListControllerComponent::ReconnectOrDisconnectRandomPlayer() {
     int RandomUserIndex = FMath::RandRange(0, Database.Num() - 1);
-    FDefaultUserData &RandomUserData =
-        Database[RandomUserIndex]->GetSourceData();
 
-    if (RandomUserData.GetConnectionState() ==
+    if (Database[RandomUserIndex]->GetConnectionState() ==
         EUserConnectionStateType::Online) {
-        RandomUserData.SetConnectionState(EUserConnectionStateType::Offline);
+        Database[RandomUserIndex]->SetConnectionState(
+            EUserConnectionStateType::Offline);
 
         OfflineUsersCached.Emplace(Database[RandomUserIndex]);
         OnlineUsersCached.Remove(Database[RandomUserIndex]);
     } else {
-        RandomUserData.SetConnectionState(EUserConnectionStateType::Online);
+        Database[RandomUserIndex]->SetConnectionState(
+            EUserConnectionStateType::Online);
 
         OnlineUsersCached.Emplace(Database[RandomUserIndex]);
         OfflineUsersCached.Remove(Database[RandomUserIndex]);

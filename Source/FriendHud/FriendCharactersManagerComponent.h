@@ -1,7 +1,10 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
+#include "Containers/Array.h"
+#include "Containers/Map.h"
 #include "CoreMinimal.h"
+#include "FriendHud/DefaultUserDataWrapper.h"
 #include "FriendsListControllerComponent.h"
 #include "FriendCharactersManagerComponent.generated.h"
 
@@ -14,6 +17,12 @@ public:
     UFriendCharactersManagerComponent();
 
 private:
+    UFUNCTION(BlueprintCallable,
+              Category = "Friends",
+              meta = (AllowPrivateAccess))
+    void SpawnAndSetupFriendCharacters(
+        const TArray<UDefaultUserDataWrapper *> &Database);
+
     virtual void BeginPlay() override;
 
     virtual void
@@ -21,9 +30,29 @@ private:
                   ELevelTick TickType,
                   FActorComponentTickFunction *ThisTickFunction) override;
 
-    UPROPERTY(VisibleAnywhere,
-              BlueprintReadOnly,
+    const TSubclassOf<AActor>
+    GetCharacterBlueprintForUserData(UDefaultUserDataWrapper *UserData) const;
+
+    TSubclassOf<AActor> GetRandomCharacterBlueprint() const;
+
+    void SpawnAndSetupFriendCharacter(TSubclassOf<AActor> CharacterBlueprint,
+                                      UDefaultUserDataWrapper *UserData);
+
+    UPROPERTY(EditAnywhere,
+              BlueprintReadWrite,
               Category = "Friends",
               meta = (AllowPrivateAccess))
-    UFriendsListControllerComponent *FriendsListControllerComponent;
+    TMap<UTexture2D *, TSubclassOf<AActor>> IconToCharacterBlueprintMap;
+
+    UPROPERTY(EditAnywhere,
+              BlueprintReadWrite,
+              Category = "Friends",
+              meta = (AllowPrivateAccess))
+    TArray<TSubclassOf<AActor>> FallbackCharacterBlueprints;
+
+    UPROPERTY(EditAnywhere,
+              BlueprintReadWrite,
+              Category = "Friends",
+              meta = (AllowPrivateAccess))
+    float SpawnAreaRadius = 2000;
 };

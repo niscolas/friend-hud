@@ -16,14 +16,13 @@ struct FRIENDHUD_API FDefaultUserData {
     GENERATED_BODY()
 
 public:
-    FDefaultUserData(){};
-    FDefaultUserData(UTexture2D *PIcon,
-                     FString PName,
-                     int PLevel,
-                     EUserConnectionStateType PConnectionState,
-                     FText PDescription)
-        : Icon(PIcon), Name(PName), Level(PLevel),
-          ConnectionState(PConnectionState), Description(PDescription){};
+    FORCEINLINE const UTexture2D *GetIcon() const {
+        return Icon;
+    }
+
+    FORCEINLINE const FString GetName() const {
+        return Name;
+    }
 
     FORCEINLINE EUserConnectionStateType GetConnectionState() const {
         return ConnectionState;

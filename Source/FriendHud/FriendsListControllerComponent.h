@@ -26,6 +26,10 @@ class FRIENDHUD_API UFriendsListControllerComponent : public UActorComponent {
 public:
     UFriendsListControllerComponent();
 
+    FORCEINLINE const TArray<UDefaultUserDataWrapper *> &GetDatabase() const {
+        return Database;
+    }
+
     UFUNCTION(BlueprintCallable, Category = "Friends List")
     void AppendToDatabase(TArray<FDefaultUserData> RawUsersData);
 

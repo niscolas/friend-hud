@@ -18,13 +18,23 @@ class FRIENDHUD_API UDefaultUserDataWrapper : public UObject {
 public:
     static UDefaultUserDataWrapper *From(FDefaultUserData Data);
 
-    FORCEINLINE FDefaultUserData &GetSourceData() {
+    FORCEINLINE const FDefaultUserData &GetSourceData() const {
         return SourceData;
     }
 
     FORCEINLINE void SetSourceData(FDefaultUserData Value) {
         SourceData = Value;
         SourceDataChanged.Broadcast(Value);
+    }
+
+    FORCEINLINE EUserConnectionStateType GetConnectionState() {
+        return SourceData.GetConnectionState();
+    }
+
+    FORCEINLINE void
+    SetConnectionState(EUserConnectionStateType PConnectionState) {
+        SourceData.SetConnectionState(PConnectionState);
+        SourceDataChanged.Broadcast(SourceData);
     }
 
 private:

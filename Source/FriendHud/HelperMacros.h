@@ -22,6 +22,12 @@
         return;                                                             \
     }
 
+#define UTIL_LOG_AND_CONTINUE_IF(Condition, CategoryName, Verbosity, Message) \
+    if (Condition) {                                                          \
+        UE_LOG(CategoryName, Verbosity, TEXT(Message));                       \
+        continue;                                                             \
+    }
+
 #define UTIL_LOG_AND_RETURN_VALUE_IF(Condition, CategoryName, Verbosity, \
                                      Message, ReturnValue)               \
     if (Condition) {                                                     \
