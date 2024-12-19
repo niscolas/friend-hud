@@ -1,5 +1,7 @@
 # 🫂 Friend HUD
 
+> 💡 A simple and cute project to learn about Unreal's UI and Viewmodel systems
+
 https://github.com/user-attachments/assets/115a1d82-e654-43b4-9f8d-906240887806
 
 ## ✨ Features
