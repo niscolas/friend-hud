@@ -67,7 +67,7 @@ void UFriendCharactersManagerComponent::SpawnAndSetupFriendCharacter(
     NavSystem->GetRandomPointInNavigableRadius(GetOwner()->GetActorLocation(),
                                                SpawnAreaRadius, NavLocation);
 
-    FRotator SpawnRotation(0.0f, 0.0f, 0.0f);
+    FRotator SpawnRotation = FRotator::ZeroRotator;
 
     FActorSpawnParameters SpawnParams;
     SpawnParams.Owner = GetOwner();
